@@ -12,15 +12,24 @@ public class DeleteBooksDatabase {
     private static final String PASSWORD = "postgres";
 
     public static void deleteBooksTable() {
-        String sql = """
-            DROP TABLE IF EXISTS books;
-            DROP TABLE IF EXISTS visitors;
+        String deleteRecords = """
+            DELETE FROM study.books WHERE isbn IN ('9788467030224', '9785171032267');
+            DELETE FROM study.visitors WHERE phone = '895-456-7372';
+            """;
+
+        String dropTables = """
+            DROP TABLE IF EXISTS study.books;
+            DROP TABLE IF EXISTS study.visitors;
             """;
 
         try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
              Statement statement = connection.createStatement()) {
-            statement.executeUpdate(sql);
-            System.out.println("Tables 'books' and 'visitors' deleted successfully");
+
+            statement.executeUpdate(deleteRecords);
+
+            statement.executeUpdate(dropTables);
+
+            System.out.println("Both 'books' and 'visitors' tables, along with related data, deleted successfully.");
         } catch (SQLException e) {
             System.err.println("Failed to delete tables.");
             e.printStackTrace();

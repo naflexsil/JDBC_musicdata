@@ -48,7 +48,7 @@ public class CreateBooksDatabase {
 
     private static void addDataFromJson(Connection connection) {
         Gson gson = new Gson();
-        try (FileReader reader = new FileReader("src/org/example/books/books.json")) {
+        try (FileReader reader = new FileReader("src/books.json")) {
             Visitor[] visitors = gson.fromJson(reader, Visitor[].class);
             Set<String> uniqueBooks = new HashSet<>();
 
@@ -85,7 +85,6 @@ public class CreateBooksDatabase {
                 book.isbn,
                 publisher);
     }
-
 
     private static class Visitor {
         String name;
