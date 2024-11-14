@@ -1,4 +1,4 @@
-package org.example;
+package org.example.music;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -22,7 +22,6 @@ public class CreateMusicDatabase {
                     "name TEXT NOT NULL);";
             statement.execute(createTableSQL);
 
-            // Вставка данных
             String insertDataSQL = "INSERT INTO study.music (id, name) " +
                     "SELECT * FROM (VALUES " +
                     "(1, 'Bohemian Rhapsody')," +
