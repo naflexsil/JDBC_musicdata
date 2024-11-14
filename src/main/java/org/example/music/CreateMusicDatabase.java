@@ -53,4 +53,20 @@ public class CreateMusicDatabase {
             e.printStackTrace();
         }
     }
+
+    // Create the music table
+    public static void createMusicTable() {
+        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
+             Statement statement = connection.createStatement()) {
+
+            String createTableSQL = "CREATE TABLE IF NOT EXISTS study.music (" +
+                    "id INT PRIMARY KEY," +
+                    "name TEXT NOT NULL);";
+            statement.execute(createTableSQL);
+            System.out.println("Music table created successfully.");
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }
