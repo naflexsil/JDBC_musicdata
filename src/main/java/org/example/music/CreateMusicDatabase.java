@@ -54,7 +54,6 @@ public class CreateMusicDatabase {
         }
     }
 
-    // Create the music table
     public static void createMusicTable() {
         try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
              Statement statement = connection.createStatement()) {

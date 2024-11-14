@@ -1,5 +1,7 @@
 package org.example;
 
+import org.example.books.CreateBooksDatabase;
+import org.example.books.DeleteBooksDatabase;
 import org.example.music.CreateMusicDatabase;
 import org.example.music.DeleteMusicDatabase;
 import org.example.music.Task1;
@@ -16,7 +18,7 @@ public class Main {
             boolean running = true;
 
             while (running) {
-                System.out.println("task (1 - 3), 'create music' or 'delete music' or 'exit' or 'back': ");
+                System.out.println("task (1 - 3), 'create music' or 'create books' or 'delete music' or 'delete books' or 'exit' or 'back': ");
                 String taskNumber = scanner.nextLine();
 
                 switch (taskNumber) {
@@ -32,8 +34,14 @@ public class Main {
                     case "create music":
                         CreateMusicDatabase.initializeDatabase();
                         break;
+                    case "create books":
+                        CreateBooksDatabase.createTables();
+                        break;
                     case "delete music":
                         DeleteMusicDatabase.deleteMusicTable();
+                        break;
+                    case "delete books":
+                        DeleteBooksDatabase.deleteBooksTable();
                         break;
                     case "back":
                         System.out.println("choose: ");
