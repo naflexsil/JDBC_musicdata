@@ -1,56 +1,24 @@
 package org.example;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.util.Scanner;
 
-public class MusicDatabase {
-    private static final String URL = "jdbc:postgresql://localhost:5432/JDBC_java";
-    private static final String USER = "postgres";
-    private static final String PASSWORD = "postgres";
+public class Main {
+    public static void main(String[] args) {
+        CreateMusicDatabase.initializeDatabase();
 
-    public static void initializeDatabase() {
-        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
-             Statement statement = connection.createStatement()) {
+        Scanner scanner = new Scanner(System.in);
 
-            String createSchemaSQL = "CREATE SCHEMA IF NOT EXISTS study;";
-            statement.execute(createSchemaSQL);
-
-            String createTableSQL = "CREATE TABLE IF NOT EXISTS study.music (" +
-                    "id INT PRIMARY KEY," +
-                    "name TEXT NOT NULL);";
-            statement.execute(createTableSQL);
-
-            // Вставка данных
-            String insertDataSQL = "INSERT INTO study.music (id, name) " +
-                    "SELECT * FROM (VALUES " +
-                    "(1, 'Bohemian Rhapsody')," +
-                    "(2, 'Stairway to Heaven')," +
-                    "(3, 'Imagine')," +
-                    "(4, 'Sweet Child O Mine')," +
-                    "(5, 'Hey Jude')," +
-                    "(6, 'Hotel California')," +
-                    "(7, 'Billie Jean')," +
-                    "(8, 'Wonderwall')," +
-                    "(9, 'Smells Like Teen Spirit')," +
-                    "(10, 'Let It Be')," +
-                    "(11, 'I Want It All')," +
-                    "(12, 'November Rain')," +
-                    "(13, 'Losing My Religion')," +
-                    "(14, 'One')," +
-                    "(15, 'With or Without You')," +
-                    "(16, 'Sweet Caroline')," +
-                    "(17, 'Yesterday')," +
-                    "(18, 'Dont Stop Believin')," +
-                    "(19, 'Crazy Train')," +
-                    "(20, 'Always')) AS new_data " +
-                    "WHERE NOT EXISTS (SELECT 1 FROM study.music);";
-
-            statement.execute(insertDataSQL);
-            System.out.println("Database initialized successfully.");
-
-        } catch (SQLException e) {
+        try (scanner) {
+            System.out.println("number task 1 - 8: ");
+            int taskNumber = scanner.nextInt();
+            switch (taskNumber) {
+                case 1:
+                    Task1.fetchAllMusic();
+                    break;
+                default:
+                    System.out.println("error in number task");
+            }
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
